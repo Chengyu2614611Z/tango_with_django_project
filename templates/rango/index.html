@@ -1,13 +1,10 @@
-{% load staticfiles %} <!-- New line -->
-<!DOCTYPE html>
-<html>
-    <head lang="en">
-        <meta charset="UTF-8" />
-        <title>Rango</title>
-    </head>
+{% extends 'rango/base.html' %}
+{% load staticfiles %}
 
-    <body>
-        {% block body_block %}
+{% block title_block %}
+Homepage
+{% endblock %}
+{% block body_block %}
         <h1>Rango says...</h1>
         <div>
             {% if user.is_authenticated %}
@@ -21,10 +18,9 @@
         <div>
         {% if Categories %}
             <ul>
-            {% for category in categories %}
+            {% for c in categories %}
                 <li>
-                    <!-- The following line is changed to add an HTML hyperlink -->
-                    <a href="{% url 'rango:show_category' category.slug %}">{{ category.name }}</a>
+                    <li><a href="{% url 'rango:show_category' c.slug %}">{{ c.name }}</a></li>
                 </li>
             {% endfor %}
             </ul>
@@ -41,6 +37,4 @@
         </div>
         {% endblock %}
 
-    </body>
 
-</html>
