@@ -5,15 +5,9 @@ from rango.models import Page
 from rango.forms import CategoryForm
 from django.shortcuts import redirect
 from rango.forms import PageForm
-from django.shortcuts import redirect
 from django.urls import reverse
 from rango.forms import UserForm, UserProfileForm
-from django.contrib.auth import authenticate, login
-from django.http import HttpResponse
-from django.urls import reverse
-from django.shortcuts import redirect
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login, logout
 from datetime import datetime
 
@@ -26,6 +20,7 @@ def index(request):
     context_dict['categories'] = category_list
     context_dict['pages'] = page_list
     visitor_cookie_handler(request)
+    context_dict['visits'] = request.session['visits']
     response = render(request, 'rango/index.html', context=context_dict)
     return response
 
